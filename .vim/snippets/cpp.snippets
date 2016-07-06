@@ -1,0 +1,468 @@
+extends c
+
+##
+## Preprocessor
+# #include <...>
+snippet inc
+	#include <${1:iostream}>
+snippet binc
+	#include <boost/${1:shared_ptr}.hpp>
+##
+## STL Collections
+# std::array
+snippet array
+	std::array<${1:T}, ${2:N}> ${3}
+# std::vector
+snippet vector
+	std::vector<${1:T}> ${2}
+# std::deque
+snippet deque
+	std::deque<${1:T}> ${2}
+# std::forward_list
+snippet flist
+	std::forward_list<${1:T}> ${2}
+# std::list
+snippet list
+	std::list<${1:T}> ${2}
+# std::set
+snippet set
+	std::set<${1:T}> ${2}
+# std::map
+snippet map
+	std::map<${1:Key}, ${2:T}> ${3}
+# std::multiset
+snippet mset
+	std::multiset<${1:T}> ${2}
+# std::multimap
+snippet mmap
+	std::multimap<${1:Key}, ${2:T}> ${3}
+# std::unordered_set
+snippet uset
+	std::unordered_set<${1:T}> ${2}
+# std::unordered_map
+snippet umap
+	std::unordered_map<${1:Key}, ${2:T}> ${3}
+# std::unordered_multiset
+snippet umset
+	std::unordered_multiset<${1:T}> ${2}
+# std::unordered_multimap
+snippet ummap
+	std::unordered_multimap<${1:Key}, ${2:T}> ${3}
+# std::stack
+snippet stack
+	std::stack<${1:T}> ${2}
+# std::queue
+snippet queue
+	std::queue<${1:T}> ${2}
+# std::priority_queue
+snippet pqueue
+	std::priority_queue<${1:T}> ${2}
+
+##
+## other STL types
+# string
+snippet s
+	std::string ${1:s}
+
+# stringstream
+snippet ss
+	std::stringstream ${1:ss}
+
+##
+## methods
+# push back
+snippet pb
+	push_back(${1:something})
+
+##
+## Access Modifiers
+# private
+snippet pri
+	private
+# protected
+snippet pro
+	protected
+# public
+snippet pub
+	public
+# friend
+snippet fr
+	friend
+# mutable
+snippet mu
+	mutable
+##
+## Class
+# class
+snippet cl
+	class ${1:`vim_snippets#Filename('$1', 'name')`} {
+	    public:
+		    /* Functions */
+		    $1(${2});
+		    ~$1();
+		    /* Public Data */
+
+	    private:
+		    ${0:/* Private Data */}
+		    /* Private Functions */
+	    protected:
+		    ${0:/* Inherited Data */}
+		    /* Inherited Functions */
+	};
+# member function implementation
+snippet mfun
+	${4:void} ${1:`vim_snippets#Filename('$1', 'ClassName')`}::${2:memberFunction}(${3}) {
+		${0}
+	}
+
+# constructor implementation
+snippet cons
+	${1:`vim_snippets#Filename('$1', 'ClassName')`}::$1(${2}) : ${3:classMember}(${4}) {
+		${0}
+	}
+
+# namespace
+snippet ns
+	namespace ${1:`vim_snippets#Filename('', 'my')`} {
+		${0}
+	} /* namespace $1 */
+##
+## Input/Output
+# std::cout
+snippet cout
+	std::cout << ${1} << std::endl;
+# std::cin
+snippet cin
+	std::cin >> ${1};
+##
+## Casts
+# static
+snippet sca
+	static_cast<${1:unsigned}>(${2:expr})${3}
+# dynamic
+snippet dca
+	dynamic_cast<${1:unsigned}>(${2:expr})${3}
+# reinterpret
+snippet rca
+	reinterpret_cast<${1:unsigned}>(${2:expr})${3}
+# const
+snippet cca
+	const_cast<${1:unsigned}>(${2:expr})${3}
+## Iteration
+# for i
+snippet fori
+	for (int ${2:i} = 0; $2 < ${1:icount}; $2${3:++}) {
+		${4}
+	}
+
+# for j
+snippet forj
+	for (int ${2:j} = 0; $2 < ${1:jcount}; $2${3:++}) {
+		${4}
+	}
+
+# for k
+snippet fork
+	for (int ${2:k} = 0; $2 < ${1:kcount}; $2${3:++}) {
+		${4}
+	}
+
+# foreach
+snippet fore
+	for (${1:auto} ${2:i} : ${3:container}) {
+		${4}
+	}
+# iterator
+snippet iter
+	for (${1:std::vector}<${2:type}>::${3:const_iterator} ${4:i} = ${5:container}.begin(); $4 != $5.end(); ++$4) {
+		${6}
+	}
+
+# auto iterator
+snippet itera
+	for (auto ${1:i} = ${2:container}.begin(); $1 != $2.end(); ++$1) {
+		${3:std::cout << *$1 << std::endl;}
+	}
+##
+## Lambdas
+# lamda (one line)
+snippet ld
+	[${1}](${2}){${3}};
+# lambda (multi-line)
+snippet lld
+	[${1}](${2}){
+		${3}
+	};
+
+##
+## OpenGL functions
+#generate buffers
+snippet gb
+	glGenBuffers(1, &${1:VBO});
+
+#generate textures
+snippet gent
+	glGenTextures(1, &${1:textureID});
+
+#generate buffers
+snippet gm
+	glGenerateMipmap(${1:GL_TEXTURE_2D});
+
+#generate vertex arrays
+snippet gva
+	glGenVertexArrays(1, &${1:VAO});
+
+#texparameteri
+snippet tpi
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, ${1:GL_REPEAT});
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+#texparameteri for cubemaps
+snippet tpic
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+#bind buffers
+snippet bb
+	glBindBuffer(${1:GL_ARRAY_BUFFER}, ${2:VBO});
+
+#bind vertex arrays
+snippet bva
+	glBindVertexArray(${1:VAO});
+
+#buffer data
+snippet bd
+	glBufferData(GL_ARRAY_BUFFER, ${1:vertices.size()} * sizeof(${2:Vertex}), &${3:vertices[0]}, ${4:GL_STATIC_DRAW});
+
+#enable vertex attribute array
+snippet evaa
+	glEnableVertexAttribArray(${1:0});
+
+#vertex attribute pointer
+snippet vap
+	glVertexAttribPointer(${1:0}, ${2:3}, ${3:GL_FLOAT}, ${4:GL_FALSE}, sizeof(${5:Vertex}), (GLvoid*)${6:0});
+#active texture
+snippet at
+	glActiveTexture(GL_TEXTURE${1:0});
+
+#bind texture
+snippet bt
+	glBindTexture(${1:GL_TEXTURE_2D}, ${2:ID});
+
+#teximage2d
+snippet ti
+	glTexImage2D(${1:GL_TEXTURE_2D}, ${2:0}, ${3:GL_RGB}, ${4:width}, ${5:height}, ${6:0}, ${7:GL_RGB}, ${8:GL_UNSIGNED_BYTE}, ${9:image});
+#stencil mask
+snippet sm
+	glStencilMask(${1:0xFF});
+
+#stencil func
+snippet sf
+	glStencilFunc(${1:GL_ALWAYS}, ${2:1}, ${3:0xFF});
+
+
+#uniform 1 float
+snippet u1f
+	glUniform1f(glGetUniformLocation(${1:program}, ${2:"name"}), ${3:n});
+
+#uniform 3 float
+snippet u3f
+	glUniform3f(glGetUniformLocation(${1:program}, ${2:"name"}), ${3:n}, ${4:n}, ${5:n});
+
+
+#uniform 1 int
+snippet u1i
+	glUniform1i(glGetUniformLocation(${1:program}, ${2:"name"}), ${3:n});
+
+#uniform matrix 4 float vector
+snippet um4
+	glUniformMatrix4fv(glGetUniformLocation(${1:program}, ${2:"name"}), ${3:n}, ${4:GL_FALSE}, ${5:glm::value_ptr(projection)});
+
+#draw elements
+snippet de
+	glDrawElements(${1:GL_TRIANGLES}, ${2:indices.size()}, ${3:GL_UNSIGNED_INT}, ${4:0});
+	
+#draw arrays
+snippet da
+	glDrawArrays(${1:GL_TRIANGLES}, ${2:0}, ${3:6});
+
+#depth mask
+snippet dm
+	glDepthMask(${1:GL_FALSE});
+
+#depth func
+snippet df
+	glDepthFunc(${1:GL_LEQUAL});
+
+##
+## OpenGL types
+#GLuint
+snippet glu
+	GLuint ${1:number}
+
+#GLfloat
+snippet glf
+	GLfloat ${1:number}
+
+#GLchar*
+snippet glc
+	GLchar* ${1:name}
+
+#GLboolean
+snippet glb
+	GLboolean ${1:flag}
+
+#0.0f 
+snippet 0
+	0.0f
+
+#1.0f 
+snippet 1
+	1.0f
+
+#2.0f 
+snippet 2
+	2.0f
+
+#3.0f 
+snippet 3
+	3.0f
+
+#vec2
+snippet vec2
+	glm::vec2(1.0f, 1.0f);
+
+#vec3
+snippet vec3
+	glm::vec3(1.0f, 1.0f, 1.0f);
+
+#vec4
+snippet vec4
+	glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+#mat4
+snippet mat4
+	glm::mat4();
+
+#translate
+snippet trans
+	glm::translate(${1:model}, ${2:glm::vec3(-1.0f, 0.0f, -1.0f)});
+
+#scale
+snippet scale
+	glm::scale(${1:model}, ${2:glm::vec3(2.0f, 2.0f, 2.0f)});
+
+
+#width height
+snippet iwh
+	int width, height;
+
+#cube vertices
+snippet cube
+	GLfloat cubeVertices[] = {
+		 -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		  0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+		  0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+		  0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+		 -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+		 -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+
+		 -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+		  0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+		  0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+		  0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+		 -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+		 -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+
+		 -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		 -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		 -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		 -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		 -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		 -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+
+		  0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		  0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		  0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		  0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		  0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+
+		 -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		  0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		  0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		  0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		 -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		 -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+		 -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		  0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		  0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		  0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		 -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		 -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+	};
+
+#plane vertices
+snippet plane
+	GLfloat planeVertices[] = {
+	     5.0f, -0.5f,  5.0f, 2.0f, 0.0f,
+	    -5.0f, -0.5f,  5.0f, 0.0f, 0.0f,
+	    -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
+
+	     5.0f, -0.5f,  5.0f, 2.0f, 0.0f,
+	    -5.0f, -0.5f, -5.0f, 2.0f, 2.0f,
+	     5.0f, -0.5f, -5.0f, 2.0f, 2.0f
+	};
+
+#skybox vertices
+snippet skybox
+	GLfloat skyboxVertices[] = {
+	    -1.0f,  1.0f, -1.0f,
+	    -1.0f, -1.0f, -1.0f,
+	     1.0f, -1.0f, -1.0f,
+	     1.0f, -1.0f, -1.0f,
+	     1.0f,  1.0f, -1.0f,
+	    -1.0f,  1.0f, -1.0f,
+
+	    -1.0f, -1.0f,  1.0f,
+	    -1.0f, -1.0f, -1.0f,
+	    -1.0f,  1.0f, -1.0f,
+	    -1.0f,  1.0f, -1.0f,
+	    -1.0f,  1.0f,  1.0f,
+	    -1.0f, -1.0f,  1.0f,
+
+	     1.0f, -1.0f, -1.0f,
+	     1.0f, -1.0f,  1.0f,
+	     1.0f,  1.0f,  1.0f,
+	     1.0f,  1.0f,  1.0f,
+	     1.0f,  1.0f, -1.0f,
+	     1.0f, -1.0f, -1.0f,
+
+	    -1.0f, -1.0f,  1.0f,
+	    -1.0f,  1.0f,  1.0f,
+	     1.0f,  1.0f,  1.0f,
+	     1.0f,  1.0f,  1.0f,
+	     1.0f, -1.0f,  1.0f,
+	    -1.0f, -1.0f,  1.0f,
+
+	    -1.0f,  1.0f, -1.0f,
+	     1.0f,  1.0f, -1.0f,
+	     1.0f,  1.0f,  1.0f,
+	     1.0f,  1.0f,  1.0f,
+	    -1.0f,  1.0f,  1.0f,
+	    -1.0f,  1.0f, -1.0f,
+
+	    -1.0F, -1.0F, -1.0F,
+	    -1.0F, -1.0F,  1.0F,
+	     1.0F, -1.0F, -1.0F,
+	     1.0F, -1.0F, -1.0F,
+	    -1.0F, -1.0F,  1.0F,
+	     1.0F, -1.0F,  1.0F
+	};

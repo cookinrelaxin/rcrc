@@ -1,0 +1,25 @@
+##GLSL vertex shader
+
+snippet ver
+	#version ${1:330} core
+
+snippet l
+	layout (location = ${1:0}) in ${2:vec3} ${3:position};
+
+snippet o
+	out ${1:vec2} ${2:TexCoords};
+
+snippet i
+	in ${1:vec2} ${2:TexCoords};
+
+snippet u
+	uniform ${1:mat4} ${2:model};
+
+snippet main
+	void main() {
+	    ${0}
+	}
+
+snippet pos
+	gl_Position = ${0};
+

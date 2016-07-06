@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/johnfeldcamp/graphics/breakout/src'
+let g:netrw_dirhist_2='/Users/johnfeldcamp/graphics/zengine/src'
+let g:netrw_dirhist_3='/Users/johnfeldcamp/graphics/zengine'
+let g:netrw_dirhist_4='/Users/johnfeldcamp/graphics/zengine/zengine'
+let g:netrw_dirhist_5='/Users/johnfeldcamp/.vim/snippets'
+let g:netrw_dirhist_6='/Users/johnfeldcamp/graphics/zengine3d/examples/model_loading'
